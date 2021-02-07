@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { memo } from 'react';
+// styles
+import styled from 'styled-components';
 
 const App: React.FC = () => {
-  return <div className='App'>hii shsh</div>;
+  return <Wrapper className='App'>hii shsh</Wrapper>;
 };
 
-export default App;
+const Wrapper = styled.div`
+  background: ${(props) => `${props.theme.colors.primary}`};
+  color: ${(props) => `${props.theme.colors.font}`};
+  height: 100vh;
+`;
+
+export default memo(App);
