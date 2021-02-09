@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 // components
 import Chat from 'components/Chat';
+import Search from 'components/Search';
 // services
 import db from 'services/firebase';
 // types
@@ -24,6 +25,7 @@ const Sidebar: React.FC = () => {
 
   return (
     <Wrapper>
+      <Search />
       {chats?.map(({ id, data }) => (
         <Chat key={id} data={data} />
       ))}
