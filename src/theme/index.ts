@@ -1,13 +1,4 @@
-const colors = {
-  // blue
-  blue: '#131a36',
-  darkBlue: '#124124',
-
-  // white
-  white: '#fff',
-  // effects
-  hover: '#374048',
-};
+import { Colors } from './colors';
 
 const filters = {
   blue: 'hue-rotate(95deg)',
@@ -15,7 +6,6 @@ const filters = {
 };
 
 const globalColors = {
-  hover: colors.hover,
   svgHover: filters.hover,
 };
 
@@ -29,10 +19,9 @@ export interface ITheme {
 export const themeBlue: ITheme = {
   title: 'blue',
   colors: {
-    primary: colors.blue,
-    secondary: colors.darkBlue,
-    font: colors.white,
-    svgColor: filters.blue,
+    primary: Colors.primaryBlue,
+    secondary: Colors.secondaryBlue,
+    font: Colors.white,
     ...globalColors,
   },
 };
