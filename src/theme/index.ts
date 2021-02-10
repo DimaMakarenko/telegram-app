@@ -19,11 +19,23 @@ export interface ITheme {
 export const themeBlue: ITheme = {
   title: 'blue',
   colors: {
-    primary: Colors.primaryBlue,
-    secondary: Colors.secondaryBlue,
+    primary: Colors.darkBlue,
+    secondary: Colors.gray900,
     font: Colors.white,
     ...globalColors,
   },
 };
 
+export const themeWhite: ITheme = {
+  title: 'white',
+  colors: {
+    primary: Colors.white,
+    secondary: Colors.gray900,
+    font: Colors.gray500,
+    secondaryFont: Colors.gray900,
+    secondaryBg: Colors.gray400,
+    search: Colors.gray100,
+    ...globalColors,
+  },
+};
 export const allThemes: ITheme[] = [themeBlue];

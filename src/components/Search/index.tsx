@@ -20,6 +20,11 @@ const Wrapper = styled.div`
 
 const Input = styled.input`
   width: 100%;
+  background-color: ${(props) => `${props.theme.colors.search}`};
+  padding: 6px 26px 6px 30px;
+  border: 1px solid ${(props) => `${props.theme.colors.search}`};
+  border-radius: 2px;
+  margin: 0;
 `;
 
 const SearchWrapper = styled.div``;

@@ -34,7 +34,6 @@ const Sidebar: React.FC = () => {
 };
 
 const Wrapper = styled.div`
-  color: white;
   width: 31%;
 `;
 
