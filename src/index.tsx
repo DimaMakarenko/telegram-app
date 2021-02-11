@@ -5,13 +5,13 @@ import { BrowserRouter } from 'react-router-dom';
 import App from 'routes';
 // styles
 import './index.css';
-import { themeBlue } from './theme';
+import { themeWhite } from './theme';
 import { ThemeProvider } from 'styled-components';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <ThemeProvider theme={themeBlue}>
+      <ThemeProvider theme={themeWhite}>
         <App />
       </ThemeProvider>
     </BrowserRouter>
