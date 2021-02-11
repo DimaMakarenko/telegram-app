@@ -3,6 +3,8 @@ import React from 'react';
 import { Formik } from 'formik';
 import Input from 'components/Form/Input';
 import Button from 'components/Button';
+// localization
+import { useTranslation } from 'react-i18next';
 // types
 import { SignInFormValuesType, SignInFormOnSubmit } from './types';
 // utils
@@ -13,18 +15,25 @@ type Props = {
   onSubmit: SignInFormOnSubmit;
 };
 
-const SignInForm: React.FC<Props> = ({ initialValues, onSubmit }) => (
-  <Formik initialValues={initialValues} validationSchema={getValidationSchema} onSubmit={onSubmit}>
-    {({ handleSubmit, isSubmitting }) => (
-      <>
-        <Input name='email' label={'email'} type='email' />
-        <Input name='password' label={'password'} type='password' />
-        <Button type='submit' onClick={() => handleSubmit()} isLoading={isSubmitting}>
-          next
-        </Button>
-      </>
-    )}
-  </Formik>
-);
+const SignInForm: React.FC<Props> = ({ initialValues, onSubmit }) => {
+  const { t } = useTranslation();
 
+  return (
+    <Formik
+      initialValues={initialValues}
+      validationSchema={getValidationSchema}
+      onSubmit={onSubmit}
+    >
+      {({ handleSubmit, isSubmitting }) => (
+        <>
+          <Input name='email' label={t('auth:email')} type='email' />
+          <Input name='password' label={t('auth:password')} type='password' />
+          <Button type='submit' onClick={() => handleSubmit()} isLoading={isSubmitting}>
+            {t('common:next')}
+          </Button>
+        </>
+      )}
+    </Formik>
+  );
+};
 export default SignInForm;
