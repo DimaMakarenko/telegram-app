@@ -1,4 +1,6 @@
 import React from 'react';
+// styles
+import styled from 'styled-components';
 
 export type InputComponentProps = React.InputHTMLAttributes<HTMLInputElement> & {
   error?: string;
@@ -13,17 +15,26 @@ const InputComponent: React.FC<InputComponentProps> = ({
   labelStyle,
   label,
   ...props
-}) => {
-  return (
-    <div>
-      <label htmlFor={props.name}>{label}</label>
+}) => (
+  <Wrapper>
+    <Input {...props} />
+    <Label htmlFor={props.name}>{label}</Label>
+    {error && <Error>{error}</Error>}
+  </Wrapper>
+);
 
-      <div>
-        <input {...props} />
-      </div>
-      {error && <span>{error}</span>}
-    </div>
-  );
-};
+const Error = styled.span``;
+const Input = styled.input``;
+const Label = styled.label`
+  ${Input}:hover ~ & {
+    top: -18px;
+    font-size: 14px;
+    color: #5264ae;
+  }
+`;
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 export default InputComponent;
