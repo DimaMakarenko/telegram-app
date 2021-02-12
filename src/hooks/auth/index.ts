@@ -3,7 +3,8 @@ import { useCallback } from 'react';
 import api from 'services/api/auth';
 import { setAuthData } from 'services/storage/auth';
 // types
-import { AuthEmailSigninRequestData } from 'entities/auth';
+import { AuthEmailSigninRequestData, AuthEmailSignUpRequestData } from 'entities/auth';
+import { User } from 'entities/user';
 
 const useAuth = () => {
   const signIn = useCallback(async (values: AuthEmailSigninRequestData) => {
@@ -15,12 +16,24 @@ const useAuth = () => {
     return result;
   }, []);
 
+  const signUp = useCallback(async (values: AuthEmailSignUpRequestData) => {
+    const result = await api.signUp(values);
+    const uid = result?.user?.uid;
+
+    if (uid) {
+      const user: User = { firstName: values.firstName, lastName: values.lastName, uid };
+      api.setUser(user);
+    }
+    return result;
+  }, []);
+
   const signOut = useCallback(async () => {
     await api.signOut();
   }, []);
 
   return {
     signIn,
+    signUp,
     signOut,
   };
 };
