@@ -9,41 +9,42 @@ export type InputComponentProps = React.InputHTMLAttributes<HTMLInputElement> & 
 
 const InputComponent: React.FC<InputComponentProps> = ({ error, label, ...props }) => (
   <Wrapper>
-    <Input {...props} />
-    <Label htmlFor={props.name}>{label}</Label>
-    {error && <Error>{error}</Error>}
+    <Label htmlFor={props.name} error={error}>
+      {error || label}
+    </Label>
+    <Input {...props} error={error} />
   </Wrapper>
 );
 
-const Error = styled.span``;
+const Label = styled.label`
+  transition: 0.15s;
+  pointer-events: none;
+  font-weight: 400;
+  display: block;
+  font-size: 13px;
+  color: ${(props: { error?: string; theme?: any }) =>
+    `${props.error ? `${props.theme.colors.danger}` : ' #999'}`};
+`;
 const Input = styled.input`
   color: #000;
-  background: #fff;
   display: inline-block;
+  background-color: transparent;
   border: 0;
   outline: 0;
   font-size: 13px;
-  padding: 3px 0;
-  margin: 3px 0 0;
+  margin: 3px 0;
   width: 100%;
-  resize: none;
-`;
-const Label = styled.label`
-  ${Input}:hover ~ & {
-    top: -18px;
-    font-size: 14px;
-    color: #5264ae;
+  padding-bottom: 3px;
+  border-bottom: ${(props: { error?: string; theme?: any }) =>
+    `1px solid ${props.error ? `${props.theme.colors.danger}` : '#e6e6e6'}`};
+
+  &:focus {
+    border-bottom: 2px solid #6bace1;
   }
 `;
 
 const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
   position: relative;
-  border-bottom: 1px solid #e6e6e6;
-
-  ${Input}:hover + {
-    border-bottom: 5px solid #6bece1;
-  }
+  margin: 10px 0 20px;
 `;
 export default InputComponent;

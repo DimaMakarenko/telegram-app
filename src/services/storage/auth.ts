@@ -24,5 +24,10 @@ export const setAuthData = async (data: AuthSession): Promise<void> => {
 };
 
 export const clearAuthData = async (): Promise<void> => {
-  return await Cookies.remove(AUTH_DATA_KEY);
+  try {
+    await Cookies.remove(AUTH_DATA_KEY);
+  } catch (error) {
+    // TODO: implement error handler
+    console.log('setAuthData error', error);
+  }
 };

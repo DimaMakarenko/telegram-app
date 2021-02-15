@@ -1,6 +1,7 @@
 import React, { useMemo, useCallback } from 'react';
 // components
 import Form from './Form';
+import FromWrapper from '../FormWrapper';
 // hooks
 import useAuth from 'hooks/auth';
 // types
@@ -27,9 +28,9 @@ const SignIn: React.FC = () => {
   );
 
   return (
-    <div>
+    <FromWrapper>
       <Form initialValues={initialValues} onSubmit={onSignIn} />
-    </div>
+    </FromWrapper>
   );
 };
 

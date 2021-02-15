@@ -4,9 +4,9 @@ import { TFunction } from 'i18next';
 
 const getValidationSchema = (t: TFunction) =>
   Yup.object({
-    firstName: Yup.string().required(t('forms:required')),
-    lastName: Yup.string().required(t('forms:required')),
-    email: Yup.string().email(t('forms:email')).required(t('forms:required')),
+    firstName: Yup.string().required(t('forms:requiredFirstName')),
+    lastName: Yup.string().required(t('forms:requiredLastName')),
+    email: Yup.string().email(t('forms:email')).required(t('forms:requiredEmail')),
     password: Yup.string()
       .min(
         6,
@@ -20,7 +20,7 @@ const getValidationSchema = (t: TFunction) =>
           max: 64,
         }),
       )
-      .required(t('forms:required')),
+      .required(t('forms:requiredPassword')),
   }).defined();
 
 export default getValidationSchema;

@@ -6,8 +6,12 @@ export default {
     email: 'Email',
     password: 'Password',
   },
-  form: {
+  forms: {
     required: 'This field is required',
+    requiredFirstName: 'First Name is required field',
+    requiredLastName: 'Last Name is required field',
+    requiredEmail: 'Email is required field',
+    requiredPassword: 'Password is required field',
     confirmPassword: 'Passwords must match',
     email: 'Incorrect email',
     minNumberValue: 'Must be greater or equal to {{min}}',

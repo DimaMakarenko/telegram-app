@@ -14,10 +14,11 @@ const Button: React.FC<Props> = ({ isLoading, children, ...rest }) => {
     </ButtonStyled>
   );
 };
+
 const ButtonStyled = styled.button`
-  padding: 6px;
-  border: 2px solid red;
+  padding: 8px 14px;
   box-sizing: border-box;
+  background-color: transparent;
   cursor: pointer;
 `;
 
