@@ -13,7 +13,7 @@ const App: React.FC = () => {
   return (
     <Wrapper className='App'>
       <Switch>
-        <Route path={[AuthRoutes.SignIn]} component={Auth} />
+        <Route path={[AuthRoutes.SignIn, AuthRoutes.SignUp]} component={Auth} />
         <Route path='/' component={Main} />
       </Switch>
     </Wrapper>

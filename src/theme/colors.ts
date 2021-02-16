@@ -4,6 +4,7 @@ export const Colors = {
 
   // white
   white: '#fff',
+  danger: 'red',
 
   // gray
   gray500: '#9e9e9e',

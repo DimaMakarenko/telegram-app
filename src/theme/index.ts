@@ -35,6 +35,7 @@ export const themeWhite: ITheme = {
     secondaryFont: Colors.gray900,
     secondaryBg: Colors.gray400,
     search: Colors.gray100,
+    danger: Colors.danger,
     ...globalColors,
   },
 };

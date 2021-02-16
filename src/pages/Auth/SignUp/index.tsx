@@ -5,33 +5,35 @@ import FromWrapper from '../FormWrapper';
 // hooks
 import useAuth from 'hooks/auth';
 // types
-import { SignInFormOnSubmit, SignInFormValuesType } from './Form/types';
+import { SignUpFormOnSubmit, SignUpFormValuesType } from './Form/types';
 
-const SignIn: React.FC = () => {
-  const { signIn } = useAuth();
+const SignUp: React.FC = () => {
+  const { signUp } = useAuth();
   const initialValues = useMemo(
-    (): SignInFormValuesType => ({
+    (): SignUpFormValuesType => ({
+      firstName: '',
+      lastName: '',
       email: '',
       password: '',
     }),
     [],
   );
 
-  const onSignIn: SignInFormOnSubmit = useCallback(
+  const onSignUp: SignUpFormOnSubmit = useCallback(
     async (values, { setErrors, setSubmitting }) => {
-      await signIn(values).catch((e) => {
+      await signUp(values).catch((e) => {
         setErrors({ email: e.message });
         setSubmitting(false);
       });
     },
-    [signIn],
+    [signUp],
   );
 
   return (
     <FromWrapper>
-      <Form initialValues={initialValues} onSubmit={onSignIn} />
+      <Form initialValues={initialValues} onSubmit={onSignUp} />
     </FromWrapper>
   );
 };
 
-export default SignIn;
+export default SignUp;
