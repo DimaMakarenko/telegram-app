@@ -25,13 +25,13 @@ const SignInForm: React.FC<Props> = ({ initialValues, onSubmit }) => {
       onSubmit={onSubmit}
     >
       {({ handleSubmit, isSubmitting }) => (
-        <>
+        <form onSubmit={handleSubmit}>
           <Input name='email' label={t('auth:email')} type='email' />
           <Input name='password' label={t('auth:password')} type='password' />
-          <Button type='submit' onClick={() => handleSubmit()} isLoading={isSubmitting}>
+          <Button type='submit' isLoading={isSubmitting}>
             {t('common:next')}
           </Button>
-        </>
+        </form>
       )}
     </Formik>
   );

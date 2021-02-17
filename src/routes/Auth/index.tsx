@@ -11,7 +11,7 @@ const Auth: React.FC = () => {
     <Switch>
       <Route exact path={AuthRoutes.SignIn} component={SingIn} />
       <Route exact path={AuthRoutes.SignUp} component={SignUp} />
-      <Redirect to='/' />
+      <Redirect to={AuthRoutes.SignIn} />
     </Switch>
   );
 };

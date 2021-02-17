@@ -2,9 +2,8 @@
 import db, { auth } from '../firebase';
 // types
 import { AuthEmailSigninRequestData, AuthEmailSignUpRequestData } from 'entities/auth';
-import { User } from 'entities/user';
 
-const USER_DATA_KEY = 'auth';
+const USER_DATA_KEY = 'users';
 
 export default {
   signIn: (data: AuthEmailSigninRequestData) =>
@@ -12,5 +11,8 @@ export default {
   signOut: () => auth.signOut(),
   signUp: (data: AuthEmailSignUpRequestData) =>
     auth.createUserWithEmailAndPassword(data.email, data.password),
-  setUser: (data: User) => db.collection(USER_DATA_KEY).doc(data.uid).set(data),
+  setUser: (data: { [x: string]: string }) => db.collection(USER_DATA_KEY).doc(data.uid).set(data),
+  getUserByToken: (token: string) => db.collection(USER_DATA_KEY).where('token', '==', token).get(),
+  getUserById: (id: string) => db.collection(USER_DATA_KEY).doc(id).get(),
+  setToken: (uid: string, token: string) => db.collection(USER_DATA_KEY).doc(uid).update({ token }),
 };

@@ -7,7 +7,8 @@ const AUTH_DATA_KEY = 'auth';
 
 export const getAuthData = async (): Promise<AuthSession['token'] | undefined> => {
   try {
-    return await Cookies.get(AUTH_DATA_KEY);
+    const authData = await Cookies.get(AUTH_DATA_KEY);
+    return authData;
   } catch (error) {
     // TODO: implement error handler
     console.log('getAuthData error', error);
