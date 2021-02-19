@@ -1,11 +1,13 @@
 import React, { memo, useCallback, useEffect, useContext } from 'react';
 // pages
 import Main from 'pages/Main';
+// components
+import { AppHelmet } from 'components/Helmet';
 // context
 import { UserContext, UserContextType } from 'context/userContext';
 // router
-import { Switch, Route } from 'react-router-dom';
-import { AuthRoutes } from 'routes/Routes';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import { AuthRoutes, ChatRoutes } from 'routes/Routes';
 import Auth from 'routes/Auth';
 // services
 import { getAuthData } from 'services/storage/auth';
@@ -32,16 +34,12 @@ const App: React.FC = () => {
 
   return (
     <Wrapper className='App'>
+      <AppHelmet />
       <Switch>
-        {!user ? (
-          <>
-            <Route exact path={[AuthRoutes.SignIn, AuthRoutes.SignUp]} component={Auth} />
-          </>
-        ) : (
-          <>
-            <Route exact path='/chats' component={Main} />
-          </>
-        )}
+        <Route path={ChatRoutes.Chats} component={Main} />
+        <Route path={[AuthRoutes.SignIn, AuthRoutes.SignUp]} component={Auth} />
+
+        {!user ? <Redirect to={AuthRoutes.SignIn} /> : <Redirect to={ChatRoutes.Chats} />}
       </Switch>
     </Wrapper>
   );
