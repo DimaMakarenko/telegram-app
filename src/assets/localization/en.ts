@@ -21,4 +21,18 @@ export default {
     firstName: 'First Name',
     lastName: 'Last Name',
   },
+  helmet: {
+    telegram: 'Telegram App',
+    signIn: {
+      title: 'Sign in',
+      description: 'Login to account',
+      content: 'Login to your account and ...',
+    },
+
+    signUp: {
+      title: 'Sign up',
+      description: 'Create new account',
+      content: 'Create your new account and ...',
+    },
+  },
 };

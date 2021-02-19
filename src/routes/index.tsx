@@ -1,28 +1,51 @@
-import React, { memo } from 'react';
-// router
-import { Switch, Route } from 'react-router-dom';
+import React, { memo, useCallback, useEffect, useContext } from 'react';
 // pages
 import Main from 'pages/Main';
-// routes
-import { AuthRoutes } from 'routes/Routes';
+// components
+import { AppHelmet } from 'components/Helmet';
+// context
+import { UserContext, UserContextType } from 'context/userContext';
+// router
+import { Switch, Route, Redirect } from 'react-router-dom';
+import { AuthRoutes, ChatRoutes } from 'routes/Routes';
 import Auth from 'routes/Auth';
+// services
+import { getAuthData } from 'services/storage/auth';
+// hooks
+import useAuth from 'hooks/auth';
 // styles
 import styled from 'styled-components';
 
 const App: React.FC = () => {
+  const { user } = useContext(UserContext) as UserContextType;
+  const { getUser } = useAuth();
+
+  const bootstrapAsync = useCallback(async () => {
+    const authToken = await getAuthData();
+
+    if (authToken) {
+      getUser(authToken);
+    }
+  }, [getUser]);
+
+  useEffect(() => {
+    bootstrapAsync();
+  }, [bootstrapAsync]);
+
   return (
     <Wrapper className='App'>
+      <AppHelmet />
       <Switch>
+        <Route path={ChatRoutes.Chats} component={Main} />
         <Route path={[AuthRoutes.SignIn, AuthRoutes.SignUp]} component={Auth} />
-        <Route path='/' component={Main} />
+
+        {!user ? <Redirect to={AuthRoutes.SignIn} /> : <Redirect to={ChatRoutes.Chats} />}
       </Switch>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
-  /* background: ${(props) => `${props.theme.colors.primary}`}; */
-  /* color: ${(props) => `${props.theme.colors.font}`}; */
   height: 100vh;
 `;
 

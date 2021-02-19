@@ -1,4 +1,8 @@
 export enum AuthRoutes {
-  SignIn = '/sign-in',
-  SignUp = '/sign-up',
+  SignIn = '/auth/sign-in',
+  SignUp = '/auth/sign-up',
+}
+
+export enum ChatRoutes {
+  Chats = '/chats',
 }

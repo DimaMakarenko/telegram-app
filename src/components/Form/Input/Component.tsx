@@ -1,18 +1,25 @@
 import React from 'react';
+// types
+import { ITheme } from 'theme';
 // styles
 import styled from 'styled-components';
+
+type StyleType = {
+  errorStyle: string;
+  theme: ITheme;
+};
 
 export type InputComponentProps = React.InputHTMLAttributes<HTMLInputElement> & {
   error?: string;
   label?: string;
 };
 
-const InputComponent: React.FC<InputComponentProps> = ({ error, label, ...props }) => (
+const InputComponent: React.FC<InputComponentProps> = ({ error = '', label, ...props }) => (
   <Wrapper>
-    <Label htmlFor={props.name} error={error}>
+    <Label htmlFor={props.name} errorStyle={error}>
       {error || label}
     </Label>
-    <Input {...props} error={error} />
+    <Input {...props} errorStyle={error} />
   </Wrapper>
 );
 
@@ -22,8 +29,8 @@ const Label = styled.label`
   font-weight: 400;
   display: block;
   font-size: 13px;
-  color: ${(props: { error?: string; theme?: any }) =>
-    `${props.error ? `${props.theme.colors.danger}` : ' #999'}`};
+  color: ${({ errorStyle, theme }: StyleType) =>
+    `${errorStyle ? `${theme.colors.danger}` : ' #999'}`};
 `;
 const Input = styled.input`
   color: #000;
@@ -35,8 +42,8 @@ const Input = styled.input`
   margin: 3px 0;
   width: 100%;
   padding-bottom: 3px;
-  border-bottom: ${(props: { error?: string; theme?: any }) =>
-    `1px solid ${props.error ? `${props.theme.colors.danger}` : '#e6e6e6'}`};
+  border-bottom: ${({ errorStyle, theme }: StyleType) =>
+    `1px solid ${errorStyle ? `${theme.colors.danger}` : '#e6e6e6'}`};
 
   &:focus {
     border-bottom: 2px solid #6bace1;

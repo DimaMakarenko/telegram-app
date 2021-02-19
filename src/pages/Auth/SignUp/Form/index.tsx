@@ -22,15 +22,15 @@ const SignUpForm: React.FC<Props> = ({ initialValues, onSubmit }) => {
   return (
     <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
       {({ handleSubmit, isSubmitting }) => (
-        <>
+        <form onSubmit={handleSubmit}>
           <Input name='firstName' label={t('profile:firstName')} type='text' />
           <Input name='lastName' label={t('profile:lastName')} type='text' />
           <Input name='email' label={t('auth:email')} type='email' />
           <Input name='password' label={t('auth:password')} type='password' />
-          <Button type='submit' onClick={() => handleSubmit()} isLoading={isSubmitting}>
+          <Button type='submit' isLoading={isSubmitting}>
             {t('common:next')}
           </Button>
-        </>
+        </form>
       )}
     </Formik>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 // components
-import Sidebar from 'pages/Sidebar';
+import Sidebar from 'pages/Chats';
 
 const Main: React.FC = () => {
   return (
