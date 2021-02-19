@@ -1,40 +1,44 @@
-import React, { useEffect, useState } from 'react';
-// components
-import Chat from 'components/Chat';
-import Search from 'components/Search';
-// services
-import db from 'services/firebase';
-// types
-import { ChatType } from 'entities/chat';
-// styles
+import React, { useState, useCallback } from 'react';
+// icons
+import MenuIcon from '@material-ui/icons/Menu';
+// styled
 import styled from 'styled-components';
 
 const Sidebar: React.FC = () => {
-  const [chats, setChats] = useState<ChatType[] | undefined>(undefined);
+  const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => {
-    db.collection('chats').onSnapshot((snapshot) =>
-      setChats(
-        snapshot.docs.map((doc) => ({
-          id: doc.id,
-          data: doc.data(),
-        })),
-      ),
-    );
-  }, []);
+  const handleMenuClick = useCallback(() => setIsOpen((prev) => !prev), []);
 
   return (
-    <Wrapper>
-      <Search />
-      {chats?.map(({ id, data }) => (
-        <Chat key={id} data={data} />
-      ))}
-    </Wrapper>
+    <>
+      <ButtonWrapper>
+        <button onClick={handleMenuClick}>
+          <MenuIcon />
+        </button>
+      </ButtonWrapper>
+      <Wrapper isOpen={isOpen}>
+        sidebar
+        <p>kdjnhkdjn</p>
+      </Wrapper>
+    </>
   );
 };
 
 const Wrapper = styled.div`
-  width: 31%;
+  width: ${({ isOpen }: { isOpen: boolean }) => (isOpen ? '300px' : '0px')};
+  display: flex;
+  flex-direction: column;
+  background-color: blue;
+  top: 0;
+  bottom: 0;
+  position: absolute;
+  z-index: 1;
+  overflow: hidden;
+  transition: 0.1s ease-out;
 `;
 
+const ButtonWrapper = styled.div`
+  z-index: 2;
+  position: relative;
+`;
 export default Sidebar;
